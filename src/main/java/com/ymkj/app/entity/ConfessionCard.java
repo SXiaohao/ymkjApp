@@ -10,7 +10,6 @@ import static com.ymkj.app.utils.RelativeDateFormat.formatToString;
 
 /**
  * 表白墙文章卡片实体类
- *
  * @author Xiaohao
  * @date 2019/02/28
  */

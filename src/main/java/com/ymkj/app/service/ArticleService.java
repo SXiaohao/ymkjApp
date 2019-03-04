@@ -6,8 +6,13 @@ import com.ymkj.app.mapper.ArticleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
+
+/**
+ * 文章逻辑层
+ * @author Xiaohao
+ * @date 2019/03/04
+ */
 @Service
 public class ArticleService {
 

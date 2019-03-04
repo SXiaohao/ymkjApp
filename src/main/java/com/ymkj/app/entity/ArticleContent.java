@@ -6,6 +6,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
+/**
+ * 文章内容实体类
+ * @author Xiaohao
+ * @date 2019/03/04
+ */
 @Data
 public class ArticleContent {
 
