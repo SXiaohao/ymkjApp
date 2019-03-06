@@ -8,6 +8,7 @@ import com.ymkj.app.mapper.ArticleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.validation.constraints.Null;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -22,7 +23,7 @@ import java.util.Map;
 @Service
 public class ArticleService {
 
-    @Autowired
+    @Resource
     ArticleMapper articleMapper;
 
     /**

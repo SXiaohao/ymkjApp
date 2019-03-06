@@ -11,6 +11,7 @@ import java.util.List;
 @Data
 public class ArticleComment {
     private  int commentId;
+    private int commentatorId;
     private String commentatorName;
     private String avatar;
     private int articleId;

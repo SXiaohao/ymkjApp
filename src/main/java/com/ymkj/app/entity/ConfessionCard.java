@@ -24,6 +24,7 @@ public class ConfessionCard {
     private String releaseTime;
     private int thumbsUp;
     private int readingVolume;
+    private int schoolId;
     private String[] imagesList;
 
     public void setContent(String content) {

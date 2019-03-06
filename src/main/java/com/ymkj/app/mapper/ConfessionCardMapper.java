@@ -20,7 +20,7 @@ public interface ConfessionCardMapper {
      * @param limit '结束'
      * @return List<Confession>
      */
-    @Select("select ym_confession.userId, ym_user.userName,avatar,ym_confession.articleId,content,releaseTime,readingVolume,thumbsUp ,GROUP_CONCAT(imagePath)AS imagesList from ym_user,ym_confession,ym_confession_image where ym_confession.userId=ym_user.userId AND ym_confession.articleId=ym_confession_image.articleId  group by ym_confession.articleId ORDER BY `ym_confession`.`releaseTime` DESC limit #{page},#{limit}")
+    @Select("select ym_confession.*, ym_user.userName,avatar ,GROUP_CONCAT(imagePath)AS imagesList from ym_user,ym_confession,ym_confession_image where ym_confession.userId=ym_user.userId AND ym_confession.articleId=ym_confession_image.articleId  group by ym_confession.articleId ORDER BY `ym_confession`.`releaseTime` DESC limit #{page},#{limit}")
     List<ConfessionCard> findOfAll(@Param("page") int page,@Param("limit") int limit);
 
     /**
