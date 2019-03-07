@@ -17,6 +17,7 @@ import java.util.Map;
 
 /**
  * 文章逻辑层
+ *
  * @author Xiaohao
  * @date 2019/03/04
  */
@@ -35,18 +36,22 @@ public class ArticleService {
         return articleMapper.getArticleContent(articleId);
     }
 
-    public Map getCommentAndReply(int articleId){
-        List<ArticleComment> commentAndReplyList=articleMapper.getArticleComment(articleId);
-        Map<String,Object> map =new LinkedHashMap<String, Object>(){};
-        if (commentAndReplyList.size()!=0) {
+    public Map getCommentAndReply(int articleId) {
+        List<ArticleComment> commentAndReplyList = articleMapper.getArticleComment(articleId);
+        Map<String, Object> map = new LinkedHashMap<String, Object>() {
+        };
+        if (commentAndReplyList.size() != 0) {
             for (ArticleComment comment : commentAndReplyList
             ) {
                 comment.setReplyList(articleMapper.getArticleReply(comment.getCommentId()));
             }
-            map.put("commentAndReplyList",commentAndReplyList);
-        }else {
-           map.put("status",300);
-           map.put("msg","暂无评论");
+            map.put("commentAndReplyList", commentAndReplyList);
+            map.put("length", commentAndReplyList.size());
+            map.put("other", "查看全部评论 ");
+        } else {
+            map.put("commentAndReplyList", commentAndReplyList);
+            map.put("length", 0);
+            map.put("other", "暂无评论");
         }
 
         return map;
