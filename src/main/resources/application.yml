@@ -31,3 +31,5 @@ spring:
       port: 35729
     restart:
       enabled: true #是否支持热部署
+
+

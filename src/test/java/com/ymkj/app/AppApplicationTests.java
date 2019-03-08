@@ -17,6 +17,7 @@ import java.text.ParseException;
 
 
 import static com.ymkj.app.utils.PasswordHash.createHash;
+import static com.ymkj.app.utils.PasswordHash.validatePassword;
 
 
 @RunWith(SpringRunner.class)
@@ -24,11 +25,10 @@ import static com.ymkj.app.utils.PasswordHash.createHash;
 public class AppApplicationTests {
 
     @Test
-    public void contextLoads() throws InvalidKeySpecException, NoSuchAlgorithmException {
+    public void contextLoads()  {
 
-        KeyGenerator keygen = KeyGenerator.getInstance("AES");
-        SecretKey deskey = keygen.generateKey();
-        System.out.println(Base64.encodeToString(deskey.getEncoded()));
+
+
 
 
     }

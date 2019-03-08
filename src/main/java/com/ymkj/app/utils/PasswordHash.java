@@ -59,7 +59,7 @@ public class PasswordHash
      * @param   correctHash     有效密码 =》格式化为16进制的字符串
      * @return                  如果密码正确则为真，如果错误则为假
      */
-    public static boolean validatePassword(String password, String correctHash)
+    public static String[] validatePassword(String password, String correctHash)
             throws NoSuchAlgorithmException, InvalidKeySpecException
     {
         return validatePassword(password.toCharArray(), correctHash);
@@ -72,7 +72,7 @@ public class PasswordHash
      * @param   correctHash     有效密码 =》格式化为16进制的字符串
      * @return                  如果密码正确则为真，如果错误则为假
      */
-    private static boolean validatePassword(char[] password, String correctHash)
+    public static String[] validatePassword(char[] password, String correctHash)
             throws NoSuchAlgorithmException, InvalidKeySpecException
     {
         // 将格式化为16进制的字符串解码为其参数
@@ -83,7 +83,7 @@ public class PasswordHash
         // 使用相同的盐值、迭代计数和哈希长度计算提供的密码的哈希
         byte[] testHash = pbkdf2(password, salt, iterations, hash.length);
         // 比较常量时间内的哈希值。如果两个哈希匹配，则密码正确。
-        return slowEquals(hash, testHash);
+        return new String[]{toHex(hash),toHex(testHash)};
     }
 
     /**
