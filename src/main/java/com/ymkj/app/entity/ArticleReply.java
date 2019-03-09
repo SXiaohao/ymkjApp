@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import static com.ymkj.app.utils.RelativeDateFormat.formatToString;
 
 /**
+ * 评论回复实体类
  * @author Xiaohao
  * @date 2019/03/05
  */

@@ -2,7 +2,6 @@ package com.ymkj.app.service;
 
 import com.ymkj.app.entity.ConfessionCard;
 import com.ymkj.app.mapper.ConfessionCardMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -22,6 +21,8 @@ public class ConfessionService {
     ConfessionCardMapper confessionCardMapper;
 
     /**
+     * 表白墙文章列表
+     *
      * @param page '页码'
      * @return List
      */

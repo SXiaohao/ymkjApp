@@ -24,8 +24,10 @@ public class ArticleService {
     ArticleMapper articleMapper;
 
     /**
+     * 文章内容 附带 5条评论
+     *
      * @param articleId 文章id
-     * @return 文章内容 附带 5条评论
+     * @return map
      */
     public Map getArticleContent(int articleId) {
         Map<String, Object> map = new LinkedHashMap<>();
@@ -34,17 +36,18 @@ public class ArticleService {
         if (commentAndReplyList.size() != 0) {
             foreachReply(commentAndReplyList);
             map.put("commentAndReplyList", commentAndReplyList);
-            map.put("other","查看全部评论 ");
+            map.put("other", "查看全部评论 ");
 
-        }else {
+        } else {
             map.put("commentAndReplyList", commentAndReplyList);
-            map.put("other","暂无评论");
+            map.put("other", "暂无评论");
         }
         return map;
     }
 
     /**
      * 评论详情页
+     *
      * @param articleId 文章id
      * @return 文章的全部的评论
      */

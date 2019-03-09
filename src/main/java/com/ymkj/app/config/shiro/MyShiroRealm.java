@@ -1,9 +1,9 @@
 package com.ymkj.app.config.shiro;
 
-import com.ymkj.app.entity.User;
+import com.ymkj.app.controller.index.Login;
+import com.ymkj.app.entity.LoginUser;
+import com.ymkj.app.entity.RegisterUser;
 import com.ymkj.app.mapper.LoginMapper;
-import com.ymkj.app.service.LoginService;
-import com.ymkj.app.utils.PasswordHash;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -22,6 +22,7 @@ import static com.ymkj.app.utils.PasswordHash.validatePassword;
 public class MyShiroRealm extends AuthorizingRealm {
     @Resource
     LoginMapper loginMapper;
+
     /**
      * 角色权限和对应权限添加
      *
@@ -30,34 +31,30 @@ public class MyShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-       return null;
+        return null;
     }
 
     /**
      * 认证逻辑
-     * @param authenticationToken ''
-     * @return
+     *
+     * @param authenticationToken
+     * @return AuthenticationInfo
      * @throws AuthenticationException
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
 
-        UsernamePasswordToken token=(UsernamePasswordToken) authenticationToken;
-        User user= loginMapper.findByName(token.getUsername());
-        System.out.println(user);
-        String[] passwordString= new String[2];
-        if(user!=null){
-            System.out.println(user);
+        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
+        LoginUser user = loginMapper.findByPhone(token.getUsername());
+        if (user != null) {
             try {
-                passwordString = validatePassword(token.getPassword(),user.getPassword());
-                System.out.println(passwordString[1]);
+                String[] passwordString = validatePassword(token.getPassword(), user.getPassword());
                 token.setPassword(passwordString[1].toCharArray());
+                return new SimpleAuthenticationInfo(user, passwordString[0], "MyShiroRealm");
             } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
                 e.printStackTrace();
             }
-            return new SimpleAuthenticationInfo("",passwordString[0],"");
         }
-        System.out.println(411);
         return null;
     }
 }

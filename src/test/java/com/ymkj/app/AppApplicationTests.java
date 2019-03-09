@@ -28,8 +28,13 @@ public class AppApplicationTests {
     public void contextLoads()  {
 
 
-
-
+        try {
+            String [] strings= PasswordHash.validatePassword("18841725546","1000:0397e5f820ca8a99fe2560c77b5031051345a1a904b4de16:5bf032470a3f989b447b92a2b4f775228a864dfaa21eca58");
+            System.out.println(strings[0]);
+            System.out.println(strings[1]);
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            e.printStackTrace();
+        }
 
     }
 }

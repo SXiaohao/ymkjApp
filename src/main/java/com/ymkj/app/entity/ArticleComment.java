@@ -9,6 +9,7 @@ import java.util.List;
 import static com.ymkj.app.utils.RelativeDateFormat.formatToString;
 
 /**
+ * 文章评论实体类
  * @author SXiaohao
  * @date 2019/03/05
  */

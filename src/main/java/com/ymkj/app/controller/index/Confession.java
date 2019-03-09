@@ -14,7 +14,7 @@ import java.util.Map;
  * 表白墙控制器
  *
  * @author Xiaohao
- * @date 2019/02/28 System.out.println
+ * @date 2019/02/28
  */
 @RestController
 public class Confession {
