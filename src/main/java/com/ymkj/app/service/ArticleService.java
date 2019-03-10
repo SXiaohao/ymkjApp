@@ -3,6 +3,7 @@ package com.ymkj.app.service;
 
 import com.ymkj.app.entity.ArticleComment;
 import com.ymkj.app.mapper.ArticleMapper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -34,6 +35,7 @@ public class ArticleService {
         map.put("articleContent", articleMapper.getArticleContent(articleId));
         List<ArticleComment> commentAndReplyList = articleMapper.getArticleComment(articleId);
         if (commentAndReplyList.size() != 0) {
+            //填充回复
             foreachReply(commentAndReplyList);
             map.put("commentAndReplyList", commentAndReplyList);
             map.put("other", "查看全部评论 ");
@@ -67,7 +69,7 @@ public class ArticleService {
     /**
      * 将回复填充进评论链表
      *
-     * @param commentAndReplyList 空回复的评论链表
+     * @param commentAndReplyList 评论链表
      */
     private void foreachReply(List<ArticleComment> commentAndReplyList) {
         for (ArticleComment comment : commentAndReplyList

@@ -8,6 +8,7 @@ import java.util.Date;
 
 /**
  * 格式化时间
+ *
  * @author Xiaohao
  * @date 2019/03/02
  */
@@ -19,8 +20,10 @@ public class RelativeDateFormat {
 
 
     /**
+     * 文章发表时间格式化后的字符串
+     *
      * @param date '文章发表时间'
-     * @return formatToString 文章发表时间格式化后的字符串
+     * @return formatToString
      */
     public static String formatToString(Date date) {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm");

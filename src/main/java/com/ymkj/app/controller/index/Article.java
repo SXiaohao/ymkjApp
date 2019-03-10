@@ -25,7 +25,6 @@ public class Article {
 
     @GetMapping(value = "/confession/article/{articleId}")
     public Map articleIndex(@PathVariable int articleId) {
-
         return articleService.getArticleContent(articleId);
     }
 

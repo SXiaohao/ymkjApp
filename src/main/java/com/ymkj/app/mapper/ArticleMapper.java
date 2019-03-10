@@ -21,7 +21,7 @@ public interface ArticleMapper {
     /**
      * 获取文章详情页的内容
      *
-     * @param articleId 文章id
+     * @param articleId '文章id'
      * @return ArticleContent实体类
      */
     @Select("select ym_confession.userId, ym_user.userName,avatar,ym_confession.articleId,content,releaseTime,readingVolume,thumbsUp ,GROUP_CONCAT(imagePath)AS imagesList from ym_user,ym_confession,ym_confession_image where  ym_confession.articleId=ym_confession_image.articleId  AND ym_confession.userId=ym_user.userId AND ym_confession_image.articleId=#{articleId} group by ym_confession.articleId ")
@@ -33,7 +33,7 @@ public interface ArticleMapper {
      * @param articleId 文章id
      * @return List<ArticleComment>
      */
-    @Select("SELECT * ,ym_user.userName AS commentatorName,ym_user.avatar AS avatar From ym_confession_comment,ym_user where ym_user.userId=ym_confession_comment.commentatorId AND articleId = #{articleId} LIMIT 0,5")
+    @Select("SELECT ym_confession_comment.* ,ym_user.userName AS commentatorName,ym_user.avatar AS avatar From ym_confession_comment,ym_user where ym_user.userId=ym_confession_comment.commentatorId AND articleId = #{articleId} LIMIT 0,5")
     List<ArticleComment> getArticleComment(@Param("articleId") int articleId);
 
     /**
@@ -42,7 +42,7 @@ public interface ArticleMapper {
      * @param articleId 文章id
      * @return List<ArticleComment>
      */
-    @Select("SELECT * ,ym_user.userName AS commentatorName,ym_user.avatar AS avatar From ym_confession_comment,ym_user where ym_user.userId=ym_confession_comment.commentatorId AND articleId = #{articleId}")
+    @Select("SELECT ym_confession_comment.* ,ym_user.userName AS commentatorName,ym_user.avatar AS avatar From ym_confession_comment,ym_user where ym_user.userId=ym_confession_comment.commentatorId AND articleId = #{articleId}")
     List<ArticleComment> getAllArticleComment(@Param("articleId") int articleId);
 
     /**

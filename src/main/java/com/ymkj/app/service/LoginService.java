@@ -27,21 +27,19 @@ public class LoginService {
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(phone, password);
         try {
-            subject.login(token);
-            map.put("status",statusCode.SUCCESS.getCode());
-            map.put("msg","登陆成功");
-        } catch (UnknownAccountException e) {
-            map.put("status",statusCode.ALREADY_EXISTS.getCode());
-            map.put("msg", "用户不存在");
-        }catch (IncorrectCredentialsException e){
-            map.put("status",statusCode.NOT_LOGIN.getCode());
-            map.put("msg","密码错误");
-        }
 
+            subject.login(token);
+            map.put("status", statusCode.SUCCESS.getCode());
+            map.put("msg", "登陆成功");
+        } catch (UnknownAccountException e) {
+            map.put("status", statusCode.ALREADY_EXISTS.getCode());
+            map.put("msg", "用户不存在");
+        } catch (IncorrectCredentialsException e) {
+            map.put("status", statusCode.NOT_LOGIN.getCode());
+            map.put("msg", "密码错误");
+        }
         return map;
     }
-
-
 
 
 }

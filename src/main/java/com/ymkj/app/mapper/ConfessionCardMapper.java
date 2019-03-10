@@ -26,15 +26,6 @@ public interface ConfessionCardMapper {
     List<ConfessionCard> findOfAll(@Param("page") int page, @Param("limit") int limit);
 
     /**
-     * 查找文章对应的图片
-     *
-     * @param id '目标文章id'
-     * @return 图片链接
-     */
-    @Select("SELECT imagePath From ym_confession_image where articleId = #{id}")
-    List<String> findOfConfessionImage(@Param("id") int id);
-
-    /**
      * 查询m_confession数据数量
      *
      * @return '返回ym_confession数据数量'

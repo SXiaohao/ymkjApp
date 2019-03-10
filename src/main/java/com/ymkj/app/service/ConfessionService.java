@@ -19,6 +19,10 @@ import java.util.*;
 public class ConfessionService {
     @Resource
     ConfessionCardMapper confessionCardMapper;
+    /**
+     * 表白墙每页的Card数量
+     */
+    private static final int COUNT_OF_PAGE = 20;
 
     /**
      * 表白墙文章列表
@@ -34,11 +38,11 @@ public class ConfessionService {
     }
 
     /**
-     * @return 总页数
+     * @return 表白墙总页数
      */
     public int totalPages() {
-        int totalPages = confessionCardMapper.cardsCount() / 20;
-        if (confessionCardMapper.cardsCount() / 20 != 0) {
+        int totalPages = confessionCardMapper.cardsCount() / COUNT_OF_PAGE;
+        if (confessionCardMapper.cardsCount() / COUNT_OF_PAGE != 0) {
             totalPages++;
         }
         return totalPages;

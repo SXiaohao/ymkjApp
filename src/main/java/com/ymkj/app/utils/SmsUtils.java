@@ -21,25 +21,26 @@ import java.util.Date;
  * 工程依赖了2个jar包
  * 1:aliyun-java-sdk-core.jar
  * 2:aliyun-java-sdk-dysmsapi.jar
- *
+ * <p>
  * 备注:Demo工程编码采用UTF-8
  * 国际短信发送请勿参照此DEMO
+ * @author Xiaohao
  */
 public class SmsUtils {
 
 
-    static final String product = "Dysmsapi";
-    static final String domain = "dysmsapi.aliyuncs.com";
-    static final String accessKeyId = "LTAIEAmtRB6q3vxv";
-    static final String accessKeySecret = "s1qtBFkbR7ThINpKMsdXHc47LKYfMb";
+    private static final String PRODUCT = "Dysmsapi";
+    private static final String DOMAIN = "dysmsapi.aliyuncs.com";
+    private static final String ACCESS_KEY_ID = "LTAIEAmtRB6q3vxv";
+    private static final String ACCESS_KEY_SECRET = "s1qtBFkbR7ThINpKMsdXHc47LKYfMb";
 
-    public static SendSmsResponse sendSms(String phone,String random) throws ClientException {
+    public static SendSmsResponse sendSms(String phone, String random) throws ClientException {
         //可自助调整超时时间
         System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
         System.setProperty("sun.net.client.defaultReadTimeout", "10000");
         //初始化acsClient,暂不支持region化
-        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
-        DefaultProfile.getProfile("cn-hangzhou", "cn-hangzhou", product, domain);
+        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", ACCESS_KEY_ID, ACCESS_KEY_SECRET);
+        DefaultProfile.getProfile("cn-hangzhou", "cn-hangzhou", PRODUCT, DOMAIN);
         IAcsClient acsClient = new DefaultAcsClient(profile);
 
         //组装请求对象-具体描述见控制台-文档部分内容
@@ -51,7 +52,7 @@ public class SmsUtils {
         //必填:短信模板-可在短信控制台中找到
         request.setTemplateCode("SMS_159840027");
         //可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
-        request.setTemplateParam("{ \"code\":"+random+"}");
+        request.setTemplateParam("{ \"code\":" + random + "}");
 
         //选填-上行短信扩展码(无特殊需求用户请忽略此字段)如果需要查看短信回复。这个得填上
         request.setSmsUpExtendCode("90997");
@@ -65,12 +66,13 @@ public class SmsUtils {
     }
 
 
-    public static QuerySendDetailsResponse querySendDetails(String bizId,String phone) throws ClientException {
+    public static QuerySendDetailsResponse querySendDetails(String bizId, String phone) throws ClientException {
 
         System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
         System.setProperty("sun.net.client.defaultReadTimeout", "10000");
-        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
-        DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product, domain);
+        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou",
+                ACCESS_KEY_ID, ACCESS_KEY_SECRET);
+        DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", PRODUCT, DOMAIN);
         IAcsClient acsClient = new DefaultAcsClient(profile);
 
         //组装请求对象
@@ -92,7 +94,6 @@ public class SmsUtils {
 
         return querySendDetailsResponse;
     }
-
 
 
 }
