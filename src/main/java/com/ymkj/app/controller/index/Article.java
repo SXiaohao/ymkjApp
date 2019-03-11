@@ -1,15 +1,11 @@
 package com.ymkj.app.controller.index;
 
-import com.ymkj.app.entity.ArticleContent;
-import com.ymkj.app.service.ArticleService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.ymkj.app.service.confessionserver.confessionimpl.ArticleServiceImpl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import javax.validation.constraints.Size;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,7 +17,7 @@ import java.util.Map;
 @RestController
 public class Article {
     @Resource
-    ArticleService articleService;
+    ArticleServiceImpl articleService;
 
     @GetMapping(value = "/confession/article/{articleId}")
     public Map articleIndex(@PathVariable int articleId) {

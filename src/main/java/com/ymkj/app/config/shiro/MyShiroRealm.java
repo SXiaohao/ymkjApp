@@ -1,10 +1,7 @@
 package com.ymkj.app.config.shiro;
 
-import com.ymkj.app.controller.index.Login;
 import com.ymkj.app.entity.LoginUser;
-import com.ymkj.app.entity.RegisterUser;
 import com.ymkj.app.mapper.CommonMapper;
-import com.ymkj.app.mapper.LoginMapper;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;

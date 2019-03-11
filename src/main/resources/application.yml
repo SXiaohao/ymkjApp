@@ -1,6 +1,8 @@
 server:
   port: 80
 
+
+
 spring:
   datasource:
     name: springboot
@@ -26,6 +28,9 @@ spring:
 
 
 
+
+
+
   #devtools插件
   devtools:
     livereload:
@@ -33,5 +38,6 @@ spring:
       port: 35729
     restart:
       enabled: true #是否支持热部署
+
 
 

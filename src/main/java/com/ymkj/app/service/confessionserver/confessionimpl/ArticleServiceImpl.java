@@ -1,9 +1,9 @@
-package com.ymkj.app.service;
+package com.ymkj.app.service.confessionserver.confessionimpl;
 
 
 import com.ymkj.app.entity.ArticleComment;
-import com.ymkj.app.mapper.ArticleMapper;
-import org.springframework.scheduling.annotation.Async;
+import com.ymkj.app.mapper.confession.ArticleMapper;
+import com.ymkj.app.service.confessionserver.ArticleService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -19,17 +19,13 @@ import java.util.Map;
  * @date 2019/03/04
  */
 @Service
-public class ArticleService {
+public class ArticleServiceImpl implements ArticleService {
 
     @Resource
     ArticleMapper articleMapper;
 
-    /**
-     * 文章内容 附带 5条评论
-     *
-     * @param articleId 文章id
-     * @return map
-     */
+
+    @Override
     public Map getArticleContent(int articleId) {
         Map<String, Object> map = new LinkedHashMap<>();
         map.put("articleContent", articleMapper.getArticleContent(articleId));
@@ -47,12 +43,8 @@ public class ArticleService {
         return map;
     }
 
-    /**
-     * 评论详情页
-     *
-     * @param articleId 文章id
-     * @return 文章的全部的评论
-     */
+
+    @Override
     public Map getCommentAndReply(int articleId) {
         List<ArticleComment> commentAndReplyList = articleMapper.getAllArticleComment(articleId);
         Map<String, Object> map = new LinkedHashMap<String, Object>() {

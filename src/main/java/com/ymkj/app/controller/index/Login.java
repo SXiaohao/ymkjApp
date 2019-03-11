@@ -2,7 +2,7 @@ package com.ymkj.app.controller.index;
 
 
 import com.ymkj.app.entity.LoginUser;
-import com.ymkj.app.service.LoginService;
+import com.ymkj.app.service.confessionserver.confessionimpl.LoginServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -17,7 +17,7 @@ import java.util.Map;
 @RestController
 public class Login {
     @Resource
-    LoginService loginService;
+    LoginServiceImpl loginService;
 
 
 

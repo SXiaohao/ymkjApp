@@ -1,4 +1,4 @@
-package com.ymkj.app.mapper;
+package com.ymkj.app.mapper.confession;
 
 import com.ymkj.app.entity.ConfessionCard;
 import org.apache.ibatis.annotations.Param;
@@ -20,7 +20,7 @@ public interface ConfessionCardMapper {
      *
      * @param page  '起始
      * @param limit '结束'
-     * @return List<Confession>
+     * @return List<confession>
      */
     @Select("select ym_confession.*, ym_user.userName,avatar ,GROUP_CONCAT(imagePath)AS imagesList from ym_user,ym_confession,ym_confession_image where ym_confession.userId=ym_user.userId AND ym_confession.articleId=ym_confession_image.articleId  group by ym_confession.articleId ORDER BY `ym_confession`.`releaseTime` DESC limit #{page},#{limit}")
     List<ConfessionCard> findOfAll(@Param("page") int page, @Param("limit") int limit);

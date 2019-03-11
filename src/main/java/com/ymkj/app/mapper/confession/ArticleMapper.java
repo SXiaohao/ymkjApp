@@ -1,4 +1,4 @@
-package com.ymkj.app.mapper;
+package com.ymkj.app.mapper.confession;
 
 import com.ymkj.app.entity.ArticleComment;
 import com.ymkj.app.entity.ArticleContent;

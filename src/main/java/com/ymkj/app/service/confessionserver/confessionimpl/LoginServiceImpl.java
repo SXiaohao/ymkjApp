@@ -1,7 +1,8 @@
-package com.ymkj.app.service;
+package com.ymkj.app.service.confessionserver.confessionimpl;
 
 import com.ymkj.app.entity.enumSpecification.statusCode;
-import com.ymkj.app.mapper.LoginMapper;
+import com.ymkj.app.mapper.confession.LoginMapper;
+import com.ymkj.app.service.confessionserver.LoginService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -17,10 +18,11 @@ import java.util.Map;
  * @author Xiaohao
  */
 @Service
-public class LoginService {
+public class LoginServiceImpl implements LoginService {
     @Resource
     LoginMapper loginMapper;
 
+    @Override
     public Map login(String phone, String password) {
         Map<String, Object> map = new LinkedHashMap<>();
 

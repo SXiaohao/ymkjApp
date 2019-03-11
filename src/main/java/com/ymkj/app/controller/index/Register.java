@@ -2,11 +2,12 @@ package com.ymkj.app.controller.index;
 
 
 import com.ymkj.app.entity.RegisterUser;
-import com.ymkj.app.service.RegisterService;
+import com.ymkj.app.service.confessionserver.confessionimpl.RegisterServiceImpl;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 注册控制器
@@ -17,7 +18,7 @@ import java.util.Map;
 @RestController
 public class Register {
     @Resource
-    RegisterService registerService;
+    RegisterServiceImpl registerService;
 
     /**
      * 发送验证码
@@ -40,4 +41,11 @@ public class Register {
     public Map register(@RequestBody RegisterUser user) {
         return registerService.register(user);
     }
+
+    @PostMapping ("/upload/avatar")
+    public Map upLoadImage(@RequestParam("avatar") MultipartFile file ) throws IllegalStateException {
+       return registerService.upLoad(file);
+    }
+
 }
+

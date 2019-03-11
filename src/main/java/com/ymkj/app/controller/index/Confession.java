@@ -1,7 +1,6 @@
 package com.ymkj.app.controller.index;
 
-import com.ymkj.app.service.ConfessionService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.ymkj.app.service.confessionserver.confessionimpl.ConfessionServiceImpl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +18,7 @@ import java.util.Map;
 @RestController
 public class Confession {
     @Resource
-    ConfessionService confessionService;
+    ConfessionServiceImpl confessionService;
 
 
     @GetMapping(value = "/confession/index/{page}")

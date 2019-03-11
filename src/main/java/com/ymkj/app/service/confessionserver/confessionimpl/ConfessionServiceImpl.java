@@ -1,7 +1,8 @@
-package com.ymkj.app.service;
+package com.ymkj.app.service.confessionserver.confessionimpl;
 
 import com.ymkj.app.entity.ConfessionCard;
-import com.ymkj.app.mapper.ConfessionCardMapper;
+import com.ymkj.app.mapper.confession.ConfessionCardMapper;
+import com.ymkj.app.service.confessionserver.ConfessionService;
 import org.springframework.stereotype.Service;
 
 
@@ -16,7 +17,7 @@ import java.util.*;
  * @date 2019/02/27
  */
 @Service
-public class ConfessionService {
+public class ConfessionServiceImpl implements ConfessionService {
     @Resource
     ConfessionCardMapper confessionCardMapper;
     /**
@@ -24,22 +25,13 @@ public class ConfessionService {
      */
     private static final int COUNT_OF_PAGE = 20;
 
-    /**
-     * 表白墙文章列表
-     *
-     * @param page '页码'
-     * @return List
-     */
+    @Override
     public List getConfessionCardList(int page) {
-
         List<ConfessionCard> list = confessionCardMapper.findOfAll((page - 1) * 20, page * 20);
-
         return list;
     }
 
-    /**
-     * @return 表白墙总页数
-     */
+    @Override
     public int totalPages() {
         int totalPages = confessionCardMapper.cardsCount() / COUNT_OF_PAGE;
         if (confessionCardMapper.cardsCount() / COUNT_OF_PAGE != 0) {
