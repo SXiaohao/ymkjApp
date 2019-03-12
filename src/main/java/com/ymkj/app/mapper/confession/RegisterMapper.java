@@ -39,8 +39,8 @@ public interface RegisterMapper {
      */
     @Update("UPDATE `ymkj_app`.`ym_user` " +
             "SET " +
-            "`userName` = #{userName}, `avatar` = #{avatar}, `schoolId` = #{schoolId} " +
+            "`userName` = #{userName}, `avatar` = #{avatar}, `schoolId` = #{schoolId} ,`sex` = #{sex} " +
             "WHERE `phone` = #{phone}")
-    Integer updateUser(String avatar, String userName, int sex, int schoolId, String phone);
+    Integer updateUser(String avatar, String userName, int sex, String schoolId, String phone);
 
 }

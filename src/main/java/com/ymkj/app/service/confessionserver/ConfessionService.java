@@ -1,9 +1,12 @@
 package com.ymkj.app.service.confessionserver;
 
-import com.ymkj.app.entity.ConfessionCard;
 
 import java.util.List;
 
+/**
+ * @author Xiaohao
+ * @date 2019/03/12
+ */
 public interface ConfessionService {
 
 
@@ -16,7 +19,8 @@ public interface ConfessionService {
     List getConfessionCardList(int page);
 
     /**
-     * @return 表白墙总页数
+     * 表白墙总页数
+     * @return 页数
      */
     int totalPages();
 }

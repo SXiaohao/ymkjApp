@@ -16,8 +16,11 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static com.ymkj.app.utils.SmsUtils.sendSms;
+import static java.util.concurrent.Executors.*;
 
 /**
  * @author Xiaohao
@@ -33,13 +36,15 @@ public class RegisterServiceImpl implements RegisterService {
     RegisterMapper registerMapper;
 
     private static String random;
+    private static String fileName="201903011105473949.png";
+    private static final String IMAGE_PATH="http://localhost/static/images/";
 
     @Override
     public Map sendStatus(String phone) {
         Map<String, Object> map = new LinkedHashMap<>();
-        RegisterUser user = (RegisterUser) commonMapper.findByPhone(phone);
+        RegisterUser user = commonMapper.findByPhone(phone);
         if (user != null) {
-            map.put("status", statusCode.NOT_LOGIN.getCode());
+            map.put("status", statusCode.FAILURE.getCode());
             map.put("msg", "此手机号已注册，请直接登陆！");
 
         } else {
@@ -63,7 +68,7 @@ public class RegisterServiceImpl implements RegisterService {
     public Map register(RegisterUser user) {
         Map<String, Object> map = new LinkedHashMap<>();
         if (!user.getVerificationCode().equals(random)) {
-            map.put("status", statusCode.NOT_LOGIN.getCode());
+            map.put("status", statusCode.FAILURE.getCode());
             map.put("msg", "验证码错误");
         } else {
             if (registerMapper.addRegisterUser(user.getPhone(), user.getPassword(), user.getAddDate()) == 1) {
@@ -84,8 +89,8 @@ public class RegisterServiceImpl implements RegisterService {
         if (!file.isEmpty()) {
             // 获取文件名称,包含后缀
             String fileTyps = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
-            // String tempName="demo"+fileTyps;
-            String fileName = UUID.randomUUID().toString() + fileTyps;
+            // String fileName="demo"+fileTyps;
+           fileName = UUID.randomUUID().toString() + fileTyps;
 
             // 存放在这个路径下：该路径是该工程目录下的static文件下：(注：该文件可能需要自己创建)
             // 放在static下的原因是，存放的是静态文件资源，即通过浏览器输入本地服务器地址，加文件名时是可以访问到的
@@ -104,12 +109,26 @@ public class RegisterServiceImpl implements RegisterService {
 
             return map;
         }
-        map.put("status", statusCode.NOT_LOGIN.getCode());
+        map.put("status", statusCode.FAILURE.getCode());
         map.put("msg", "上传失败！");
 
         return map;
     }
 
+    @Override
+    public Map updateInformation(RegisterUser user) {
+        Map<String,Object> map =new LinkedHashMap<>();
+        if (registerMapper.updateUser(IMAGE_PATH+fileName,user.getUserName(),user.getSex(),user.getSchoolId(),user.getPhone())==1){
+            map.put("status",statusCode.SUCCESS.getCode());
+            map.put("msg","注册成功！");
+            ExecutorService pool= newCachedThreadPool();
+            pool.execute(() -> FileUtil.moveTotherFolders(fileName));
+            return map;
+        }
+        map.put("status",statusCode.FAILURE.getCode());
+        map.put("msg","上传失败！");
 
+        return map;
+    }
 }
 

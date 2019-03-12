@@ -2,6 +2,7 @@ package com.ymkj.app.service.confessionserver;
 
 
 import com.ymkj.app.entity.RegisterUser;
+import org.apache.catalina.User;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
@@ -34,4 +35,12 @@ public interface RegisterService {
      * @return 临时图片地址
      */
     Map upLoad(MultipartFile file);
+
+
+    /**
+     * 完善用户信息
+     * @param user
+     * @return
+     */
+     Map updateInformation(RegisterUser user);
 }

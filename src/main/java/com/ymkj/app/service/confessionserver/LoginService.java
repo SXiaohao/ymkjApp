@@ -1,13 +1,5 @@
 package com.ymkj.app.service.confessionserver;
 
-import com.ymkj.app.entity.enumSpecification.statusCode;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
-
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public interface LoginService {

@@ -7,7 +7,7 @@ public enum statusCode {
     SUCCESS(200, "成功"),
 
     /** 没有登录 */
-    NOT_LOGIN(400, "没有登录"),
+    FAILURE(400, "没有登录"),
 
     /** 发生异常 */
     EXCEPTION(401, "发生异常"),

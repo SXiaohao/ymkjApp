@@ -1,7 +1,7 @@
 package com.ymkj.app.controller.index;
 
 
-import com.ymkj.app.entity.LoginUser;
+import com.ymkj.app.entity.RegisterUser;
 import com.ymkj.app.service.confessionserver.confessionimpl.LoginServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,8 +22,8 @@ public class Login {
 
 
     @PostMapping("/login")
-    public Map loginValidation(@RequestBody LoginUser user) {
-
+    public Map loginValidation(@RequestBody RegisterUser user) {
+        System.out.println(user);
         return loginService.login(user.getPhone(), user.getPassword());
     }
 }

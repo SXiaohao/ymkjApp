@@ -36,17 +36,19 @@ public class RegisterUser {
     private String addDate = sdf.format(new Date());
 
     public void setPassword(String password) {
-        try {
-            this.password = createHash(password);
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-            e.printStackTrace();
+        if (password.length() <= 11 && password.length() > 0) {
+            try {
+                this.password = createHash(password);
+            } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+                e.printStackTrace();
+            }
         }
+        this.password = password;
     }
-
 
     private String avatar;
     private int sex;
-    private int schoolId;
+    private String schoolId;
     private String userName;
 
 

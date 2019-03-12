@@ -42,10 +42,27 @@ public class Register {
         return registerService.register(user);
     }
 
+
+    /**
+     * 上传图片
+     * @param file 图片文件
+     * @return 图片
+     * @throws IllegalStateException
+     */
     @PostMapping ("/upload/avatar")
     public Map upLoadImage(@RequestParam("avatar") MultipartFile file ) throws IllegalStateException {
        return registerService.upLoad(file);
     }
 
+    /**
+     * @param user
+     * @return
+     */
+    @PostMapping("/register/getInfo")
+    public Map updateInformation(@RequestBody RegisterUser user){
+        System.out.println(user);
+        return registerService.updateInformation(user);
+    }
+    //getschool
 }
 
