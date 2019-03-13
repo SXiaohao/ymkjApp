@@ -11,6 +11,10 @@ import com.auth0.jwt.interfaces.JWTVerifier;
 
 import java.util.*;
 
+/**
+ * @author Xiaohao
+ * @date 2019/03/13
+ */
 public class JwtUtil {
 
     public static String createToken() {
@@ -49,7 +53,7 @@ public class JwtUtil {
         return null;
     }
 
-    public static String createTokenWithClaim(String userName) {
+    public static String createTokenWithClaim() {
         try {
             Algorithm algorithm = Algorithm.HMAC256("ymkj_xiaohao");
             Map<String, Object> map = new HashMap<>();
@@ -61,7 +65,7 @@ public class JwtUtil {
                     /*设置头部信息 Header*/
                     .withHeader(map)
                     /*设置 载荷 Payload*/
-                    .withClaim("loginName", userName)
+                    .withClaim("loginName", "xiaohao")
                     //签名是有谁生成 例如 服务器
                     .withIssuer("SERVICE")
                     //签名的主题
@@ -80,7 +84,7 @@ public class JwtUtil {
         }
         return null;
     }
-    public static void verifyToken(String token) {
+    public static String verifyToken(String token) {
         try {
             Algorithm algorithm = Algorithm.HMAC256("ymkj_xiaohao");
             JWTVerifier verifier = JWT.require(algorithm)
@@ -90,13 +94,14 @@ public class JwtUtil {
             String subject = jwt.getSubject();
             Map<String, Claim> claims = jwt.getClaims();
             Claim claim = claims.get("loginName");
-            //System.out.println(claim.asString()
             List<String> audience = jwt.getAudience();
-            //System.out.println(subject)
-            //System.out.println(audience.get(0))
+
+
         } catch (JWTVerificationException exception){
-            exception.printStackTrace();
+           return "token已过期";
         }
+
+        return "success!!";
     }
 
     /**

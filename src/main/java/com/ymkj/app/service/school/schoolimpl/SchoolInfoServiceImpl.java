@@ -1,8 +1,8 @@
-package com.ymkj.app.service.schoolservice.schoolimpl;
+package com.ymkj.app.service.school.schoolimpl;
 
 import com.ymkj.app.entity.School;
 import com.ymkj.app.mapper.info.SchoolInfoMapper;
-import com.ymkj.app.service.schoolservice.SchoolInfoService;
+import com.ymkj.app.service.school.SchoolInfoService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,8 +18,8 @@ public class SchoolInfoServiceImpl implements SchoolInfoService {
 
     @Override
     public void getSchoolInfo(School school) {
-        if (schoolInfoMapper.getSchoolInfo(school.getSchoolId()) == null) {
-            schoolInfoMapper.insertSchoolInfo(school.getSchoolId(), school.getSchoolName(), school.getAddr());
+        if (schoolInfoMapper.getSchoolInfo(school.getId()) == null) {
+            schoolInfoMapper.insertSchoolInfo(school.getId(), school.getSchoolName(), school.getAddr());
         }
     }
 }

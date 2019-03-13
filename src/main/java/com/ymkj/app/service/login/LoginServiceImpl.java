@@ -1,10 +1,9 @@
-package com.ymkj.app.service.confessionserver.confessionimpl;
+package com.ymkj.app.service.login;
 
-import com.ymkj.app.entity.RegisterUser;
+import com.ymkj.app.entity.User;
 import com.ymkj.app.entity.enumSpecification.statusCode;
 import com.ymkj.app.mapper.CommonMapper;
-import com.ymkj.app.mapper.confession.LoginMapper;
-import com.ymkj.app.service.confessionserver.LoginService;
+import com.ymkj.app.mapper.login.LoginMapper;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -43,7 +42,7 @@ public class LoginServiceImpl implements LoginService {
             map.put("status", statusCode.FAILURE.getCode());
             map.put("msg", "密码错误");
         }
-        RegisterUser user= commonMapper.findByPhone(phone);
+        User user= commonMapper.findByPhone(phone);
         map.put("token","");
         map.put("sex",user.getSex());
         map.put("userName",user.getUserName());

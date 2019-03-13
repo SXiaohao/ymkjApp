@@ -1,8 +1,7 @@
-package com.ymkj.app.service.confessionserver;
+package com.ymkj.app.service.register;
 
 
-import com.ymkj.app.entity.RegisterUser;
-import org.apache.catalina.User;
+import com.ymkj.app.entity.User;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
@@ -26,7 +25,7 @@ public interface RegisterService {
      * @param user 用户填写的注册信息
      * @return 注册状态
      */
-    Map register(RegisterUser user);
+    Map register(User user);
 
     /**
      * 用户上传的临时图片
@@ -37,10 +36,5 @@ public interface RegisterService {
     Map upLoad(MultipartFile file);
 
 
-    /**
-     * 完善用户信息
-     * @param user
-     * @return
-     */
-     Map updateInformation(RegisterUser user);
+
 }

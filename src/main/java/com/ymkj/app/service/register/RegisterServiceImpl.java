@@ -1,12 +1,12 @@
-package com.ymkj.app.service.confessionserver.confessionimpl;
+package com.ymkj.app.service.register;
 
 import com.aliyuncs.exceptions.ClientException;
-import com.ymkj.app.entity.RegisterUser;
+import com.ymkj.app.entity.User;
 import com.ymkj.app.entity.enumSpecification.statusCode;
 import com.ymkj.app.mapper.CommonMapper;
-import com.ymkj.app.mapper.confession.RegisterMapper;
-import com.ymkj.app.service.confessionserver.RegisterService;
+import com.ymkj.app.mapper.register.RegisterMapper;
 import com.ymkj.app.utils.FileUtil;
+import com.ymkj.app.utils.JwtUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ClassUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,7 +17,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import static com.ymkj.app.utils.SmsUtils.sendSms;
 import static java.util.concurrent.Executors.*;
@@ -34,15 +33,14 @@ public class RegisterServiceImpl implements RegisterService {
 
     @Resource
     RegisterMapper registerMapper;
-
     private static String random;
-    private static String fileName="201903011105473949.png";
-    private static final String IMAGE_PATH="http://localhost/static/images/";
+    private static String fileName = "201903011105473949.png";
+    private static final String IMAGE_PATH = "http://localhost/static/images/";
 
     @Override
     public Map sendStatus(String phone) {
         Map<String, Object> map = new LinkedHashMap<>();
-        RegisterUser user = commonMapper.findByPhone(phone);
+        User user = commonMapper.findByPhone(phone);
         if (user != null) {
             map.put("status", statusCode.FAILURE.getCode());
             map.put("msg", "此手机号已注册，请直接登陆！");
@@ -65,23 +63,25 @@ public class RegisterServiceImpl implements RegisterService {
     }
 
     @Override
-    public Map register(RegisterUser user) {
+    public Map register(User user) {
         Map<String, Object> map = new LinkedHashMap<>();
-        if (!user.getVerificationCode().equals(random)) {
-            map.put("status", statusCode.FAILURE.getCode());
-            map.put("msg", "验证码错误");
+        user.setToken(JwtUtil.createTokenWithClaim());
+        if (registerMapper.addRegisterUser(user.getPhone(),
+                user.getPassword(), user.getUserName(), IMAGE_PATH + fileName,
+                user.getAddDate(), user.getSchoolId(), user.getSex(), user.getToken()) == 1) {
+            ExecutorService pool = newCachedThreadPool();
+            pool.execute(() -> FileUtil.moveTotherFolders(fileName));
+            map.put("token", user.getToken());
+            map.put("status", statusCode.SUCCESS.getCode());
+            map.put("msg", "注册成功");
         } else {
-            if (registerMapper.addRegisterUser(user.getPhone(), user.getPassword(), user.getAddDate()) == 1) {
-                map.put("status", statusCode.SUCCESS.getCode());
-                map.put("msg", "注册成功");
-            } else {
-                map.put("status", statusCode.EXCEPTION.getCode());
-                map.put("msg", statusCode.EXCEPTION.getMessage());
-            }
-
+            map.put("status", statusCode.EXCEPTION.getCode());
+            map.put("msg", "注册失败");
         }
+
         return map;
     }
+
 
     @Override
     public Map upLoad(MultipartFile file) {
@@ -90,7 +90,7 @@ public class RegisterServiceImpl implements RegisterService {
             // 获取文件名称,包含后缀
             String fileTyps = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
             // String fileName="demo"+fileTyps;
-           fileName = UUID.randomUUID().toString() + fileTyps;
+            fileName = UUID.randomUUID().toString() + fileTyps;
 
             // 存放在这个路径下：该路径是该工程目录下的static文件下：(注：该文件可能需要自己创建)
             // 放在static下的原因是，存放的是静态文件资源，即通过浏览器输入本地服务器地址，加文件名时是可以访问到的
@@ -115,20 +115,6 @@ public class RegisterServiceImpl implements RegisterService {
         return map;
     }
 
-    @Override
-    public Map updateInformation(RegisterUser user) {
-        Map<String,Object> map =new LinkedHashMap<>();
-        if (registerMapper.updateUser(IMAGE_PATH+fileName,user.getUserName(),user.getSex(),user.getSchoolId(),user.getPhone())==1){
-            map.put("status",statusCode.SUCCESS.getCode());
-            map.put("msg","注册成功！");
-            ExecutorService pool= newCachedThreadPool();
-            pool.execute(() -> FileUtil.moveTotherFolders(fileName));
-            return map;
-        }
-        map.put("status",statusCode.FAILURE.getCode());
-        map.put("msg","上传失败！");
 
-        return map;
-    }
 }
 

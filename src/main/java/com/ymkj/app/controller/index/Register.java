@@ -1,8 +1,8 @@
 package com.ymkj.app.controller.index;
 
 
-import com.ymkj.app.entity.RegisterUser;
-import com.ymkj.app.service.confessionserver.confessionimpl.RegisterServiceImpl;
+import com.ymkj.app.entity.User;
+import com.ymkj.app.service.register.RegisterServiceImpl;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,7 +38,7 @@ public class Register {
      * @return 注册状态
      */
     @PostMapping("/register")
-    public Map register(@RequestBody RegisterUser user) {
+    public Map register(@RequestBody User user) {
         return registerService.register(user);
     }
 
@@ -54,15 +54,7 @@ public class Register {
        return registerService.upLoad(file);
     }
 
-    /**
-     * @param user
-     * @return
-     */
-    @PostMapping("/register/getInfo")
-    public Map updateInformation(@RequestBody RegisterUser user){
-        System.out.println(user);
-        return registerService.updateInformation(user);
-    }
-    //getschool
+
+
 }
 

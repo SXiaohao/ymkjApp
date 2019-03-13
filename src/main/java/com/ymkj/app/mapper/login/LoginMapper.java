@@ -1,4 +1,4 @@
-package com.ymkj.app.mapper.confession;
+package com.ymkj.app.mapper.login;
 
 
 import org.springframework.stereotype.Component;

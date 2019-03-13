@@ -1,6 +1,6 @@
 package com.ymkj.app.config.shiro;
 
-import com.ymkj.app.entity.RegisterUser;
+import com.ymkj.app.entity.User;
 import com.ymkj.app.mapper.CommonMapper;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -43,7 +43,7 @@ public class MyShiroRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
 
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-        RegisterUser user = commonMapper.findByPhone(token.getUsername());
+        User user = commonMapper.findByPhone(token.getUsername());
         if (user != null) {
             try {
                 String[] passwordString = validatePassword(token.getPassword(), user.getPassword());

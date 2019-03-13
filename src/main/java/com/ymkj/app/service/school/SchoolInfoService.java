@@ -1,4 +1,4 @@
-package com.ymkj.app.service.schoolservice;
+package com.ymkj.app.service.school;
 
 
 import com.ymkj.app.entity.School;

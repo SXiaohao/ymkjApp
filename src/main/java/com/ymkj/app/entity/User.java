@@ -1,5 +1,6 @@
 package com.ymkj.app.entity;
 
+import com.ymkj.app.utils.JwtUtil;
 import com.ymkj.app.utils.PasswordHash;
 import lombok.Data;
 import lombok.Value;
@@ -26,30 +27,30 @@ import static com.ymkj.app.utils.PasswordHash.createHash;
  * @date 2019/03/08
  */
 @Data
-public class RegisterUser {
-
+public class User {
+    private final static int MAX_LENGTH = 20;
+    private final static int MIN_LENGTH = 0;
 
     private String phone;
     private String password;
-    private String verificationCode = "Xiaohao";
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     private String addDate = sdf.format(new Date());
+    private String avatar;
+    private int sex;
+    private String schoolId;
+    private String userName;
+    private String token;
 
     public void setPassword(String password) {
-        if (password.length() <= 11 && password.length() > 0) {
+        if (password.length() <= MAX_LENGTH && password.length() > MIN_LENGTH) {
             try {
                 this.password = createHash(password);
             } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
                 e.printStackTrace();
             }
+        }else {
+            this.password = password;
         }
-        this.password = password;
+
     }
-
-    private String avatar;
-    private int sex;
-    private String schoolId;
-    private String userName;
-
-
 }

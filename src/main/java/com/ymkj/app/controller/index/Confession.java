@@ -1,6 +1,6 @@
 package com.ymkj.app.controller.index;
 
-import com.ymkj.app.service.confessionserver.confessionimpl.ConfessionServiceImpl;
+import com.ymkj.app.service.confession.confessionimpl.ConfessionServiceImpl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;

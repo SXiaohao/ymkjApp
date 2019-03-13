@@ -1,9 +1,9 @@
-package com.ymkj.app.service.confessionserver.confessionimpl;
+package com.ymkj.app.service.confession.confessionimpl;
 
 
 import com.ymkj.app.entity.ArticleComment;
 import com.ymkj.app.mapper.confession.ArticleMapper;
-import com.ymkj.app.service.confessionserver.ArticleService;
+import com.ymkj.app.service.confession.ArticleService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

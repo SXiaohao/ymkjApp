@@ -1,8 +1,8 @@
-package com.ymkj.app.service.confessionserver.confessionimpl;
+package com.ymkj.app.service.confession.confessionimpl;
 
 import com.ymkj.app.entity.ConfessionCard;
 import com.ymkj.app.mapper.confession.ConfessionCardMapper;
-import com.ymkj.app.service.confessionserver.ConfessionService;
+import com.ymkj.app.service.confession.ConfessionService;
 import org.springframework.stereotype.Service;
 
 

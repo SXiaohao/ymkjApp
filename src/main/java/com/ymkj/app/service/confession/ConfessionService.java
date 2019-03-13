@@ -1,4 +1,4 @@
-package com.ymkj.app.service.confessionserver;
+package com.ymkj.app.service.confession;
 
 
 import java.util.List;
