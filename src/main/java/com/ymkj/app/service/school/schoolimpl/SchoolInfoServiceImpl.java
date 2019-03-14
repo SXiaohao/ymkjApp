@@ -19,7 +19,7 @@ public class SchoolInfoServiceImpl implements SchoolInfoService {
     @Override
     public void getSchoolInfo(School school) {
         if (schoolInfoMapper.getSchoolInfo(school.getId()) == null) {
-            schoolInfoMapper.insertSchoolInfo(school.getId(), school.getSchoolName(), school.getAddr());
+            schoolInfoMapper.insertSchoolInfo(school.getId(), school.getTitle(), school.getAddr());
         }
     }
 }

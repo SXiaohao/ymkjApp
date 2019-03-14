@@ -20,6 +20,7 @@ public interface ConfessionService {
 
     /**
      * 表白墙总页数
+     *
      * @return 页数
      */
     int totalPages();

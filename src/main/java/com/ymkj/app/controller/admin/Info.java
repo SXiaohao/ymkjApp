@@ -20,6 +20,7 @@ public class Info {
 
     @PostMapping("/school/getSchool")
     public void schoolInfo(@RequestBody School school) {
+        System.out.println(school);
         schoolInfoService.getSchoolInfo(school);
     }
 }

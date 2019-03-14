@@ -5,6 +5,10 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author Xiaohao
+ * @date 2019/03/14
+ */
 @Component
 public interface CommonMapper {
 
@@ -15,6 +19,6 @@ public interface CommonMapper {
      * @param phone 手机号
      * @return 用户
      */
-    @Select("select * from ym_user where phone=#{phone}")
+    @Select("Select * FROM ym_user WHERE phone=#{phone}")
     User findByPhone(@Param("phone") String phone);
 }

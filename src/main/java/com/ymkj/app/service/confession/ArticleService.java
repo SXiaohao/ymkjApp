@@ -13,7 +13,7 @@ public interface ArticleService {
      * @param articleId 文章id
      * @return map
      */
-     Map getArticleContent(int articleId) ;
+    Map getArticleContent(int articleId);
 
     /**
      * 评论详情页
@@ -21,7 +21,7 @@ public interface ArticleService {
      * @param articleId '文章id'
      * @return 文章的全部的评论
      */
-     Map getCommentAndReply(int articleId) ;
+    Map getCommentAndReply(int articleId);
 
 
 }

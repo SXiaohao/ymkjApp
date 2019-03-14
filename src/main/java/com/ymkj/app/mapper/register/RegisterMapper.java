@@ -2,7 +2,6 @@ package com.ymkj.app.mapper.register;
 
 
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Component;
 
 /**
@@ -23,15 +22,16 @@ public interface RegisterMapper {
      * @param userName 昵称
      * @param avatar 头像
      * @param addDate  添加时间
-     * @param schoolId 学校id
+     * @param id 学校id
      * @param sex 性别
+     * @param token 'token'
      * @return 插入状态
      */
     @Insert("INSERT INTO `ymkj_app`.`ym_user`" +
-            "(`phone`, `password`, `userName`, `avatar`, `addDate`, `schoolId`, `sex`, `token`)" +
+            "(`phone`, `password`, `userName`, `avatar`, `addDate`, `id`, `sex`, `token`)" +
             " VALUES " +
-            "(#{phone}, #{password}, #{userName}, #{avatar}, #{addDate}, #{schoolId}, #{sex}, #{token})")
-    Integer addRegisterUser(String phone, String password, String userName, String avatar, String addDate, String schoolId, int sex,String token);
+            "(#{phone}, #{password}, #{userName}, #{avatar}, #{addDate}, #{id}, #{sex}, #{token})")
+    Integer addRegisterUser(String phone, String password, String userName, String avatar, String addDate, String id, int sex,String token);
 
 
 }

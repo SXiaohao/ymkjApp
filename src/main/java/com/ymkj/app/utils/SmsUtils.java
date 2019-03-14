@@ -24,6 +24,7 @@ import java.util.Date;
  * <p>
  * 备注:Demo工程编码采用UTF-8
  * 国际短信发送请勿参照此DEMO
+ *
  * @author Xiaohao
  */
 public class SmsUtils {
@@ -61,7 +62,6 @@ public class SmsUtils {
         request.setOutId("yourOutId");
 
         //hint 此处可能会抛出异常，注意catch
-
         return acsClient.getAcsResponse(request);
     }
 
@@ -90,9 +90,8 @@ public class SmsUtils {
         request.setCurrentPage(1L);
 
         //hint 此处可能会抛出异常，注意catch
-        QuerySendDetailsResponse querySendDetailsResponse = acsClient.getAcsResponse(request);
 
-        return querySendDetailsResponse;
+        return acsClient.getAcsResponse(request);
     }
 
 

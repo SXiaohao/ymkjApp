@@ -2,11 +2,14 @@ package com.ymkj.app.controller.index;
 
 
 import com.ymkj.app.entity.User;
+import com.ymkj.app.entity.enumSpecification.statusCode;
 import com.ymkj.app.service.register.RegisterServiceImpl;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.*;
 
 /**
@@ -45,15 +48,15 @@ public class Register {
 
     /**
      * 上传图片
+     *
      * @param file 图片文件
      * @return 图片
      * @throws IllegalStateException
      */
-    @PostMapping ("/upload/avatar")
-    public Map upLoadImage(@RequestParam("avatar") MultipartFile file ) throws IllegalStateException {
-       return registerService.upLoad(file);
+    @PostMapping("/upload/avatar")
+    public Map upLoadImage(@RequestParam("avatar") MultipartFile file) throws IllegalStateException {
+        return registerService.upLoad(file);
     }
-
 
 
 }

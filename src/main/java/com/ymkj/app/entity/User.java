@@ -29,7 +29,7 @@ import static com.ymkj.app.utils.PasswordHash.createHash;
 @Data
 public class User {
     private final static int MAX_LENGTH = 20;
-    private final static int MIN_LENGTH = 0;
+    private final static int MIN_LENGTH = 3;
 
     private String phone;
     private String password;
@@ -37,20 +37,10 @@ public class User {
     private String addDate = sdf.format(new Date());
     private String avatar;
     private int sex;
-    private String schoolId;
+    private String id;
+    private School school;
     private String userName;
     private String token;
 
-    public void setPassword(String password) {
-        if (password.length() <= MAX_LENGTH && password.length() > MIN_LENGTH) {
-            try {
-                this.password = createHash(password);
-            } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-                e.printStackTrace();
-            }
-        }else {
-            this.password = password;
-        }
 
-    }
 }

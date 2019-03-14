@@ -18,10 +18,10 @@ public class FileUtil {
     /**
      * 静态方法：三个参数：文件的二进制，文件路径，文件名
      *
-     * @param file
-     * @param filePath
-     * @param fileName
-     * @throws IOException
+     * @param file 文件
+     * @param filePath 文件路径
+     * @param fileName 文件名
+     * @throws IOException s
      */
     public static void fileupload(byte[] file, String filePath, String fileName) throws IOException {
         //目标目录
@@ -39,6 +39,7 @@ public class FileUtil {
 
     /**
      * 将图片移动至另一个文件夹下
+     *
      * @param imageName 图片名字
      */
     public static void moveTotherFolders(String imageName) {

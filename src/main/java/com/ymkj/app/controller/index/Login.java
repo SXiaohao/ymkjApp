@@ -23,7 +23,6 @@ public class Login {
 
     @PostMapping("/login")
     public Map loginValidation(@RequestBody User user) {
-        System.out.println(user);
         return loginService.login(user.getPhone(), user.getPassword());
     }
 }
