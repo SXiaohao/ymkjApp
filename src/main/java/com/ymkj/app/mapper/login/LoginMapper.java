@@ -28,9 +28,19 @@ public interface LoginMapper {
      * 更新token
      *
      * @param phone 手机号
-     * @param token  token
+     * @param token token
      * @return 更新状态
      */
     @Update("UPDATE `ym_user` SET `token` = #{token} WHERE `phone` =#{phone}")
-    Integer updateToken(String phone,String token);
+    Integer updateToken(String phone, String token);
+
+    /**
+     * 忘记密码
+     *
+     * @param phone    手机号
+     * @param password 密码
+     * @return 更新状态
+     */
+    @Update("UPDATE `ym_user` SET `password` = #{password}, WHERE `phone` =#{phone}")
+    Integer updatePassword(String phone, String password);
 }

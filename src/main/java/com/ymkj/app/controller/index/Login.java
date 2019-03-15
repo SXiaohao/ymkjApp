@@ -11,6 +11,7 @@ import java.util.Map;
 
 /**
  * 登录控制器
+ *
  * @author Xiaohao
  * @date 2019/03/08
  */
@@ -20,9 +21,13 @@ public class Login {
     LoginServiceImpl loginService;
 
 
-
     @PostMapping("/login")
     public Map loginValidation(@RequestBody User user) {
         return loginService.login(user.getPhone(), user.getPassword());
+    }
+
+    @PostMapping("/forgotPassword")
+    public Map updatePassword(@RequestBody User user) {
+        return loginService.forgotPassword(user);
     }
 }

@@ -7,7 +7,7 @@ spring:
   datasource:
     name: springboot
     type: com.alibaba.druid.pool.DruidDataSource
-      #druid相关配置
+    #druid相关配置
     #监控统计拦截的filters
     filter: stat
     #mysql驱动
@@ -29,8 +29,6 @@ spring:
 
 
 
-
-
   #devtools插件
   devtools:
     livereload:
@@ -38,6 +36,4 @@ spring:
       port: 35729
     restart:
       enabled: true #是否支持热部署
-
-
 

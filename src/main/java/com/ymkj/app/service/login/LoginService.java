@@ -1,5 +1,7 @@
 package com.ymkj.app.service.login;
 
+import com.ymkj.app.entity.User;
+
 import java.util.Map;
 
 public interface LoginService {
@@ -14,5 +16,10 @@ public interface LoginService {
      */
     Map login(String phone, String password);
 
-    Map forgotpassword();
+    /**
+     * 修改密码
+     * @param user 用户信息
+     * @return 修改状态
+     */
+    Map forgotPassword(User user);
 }

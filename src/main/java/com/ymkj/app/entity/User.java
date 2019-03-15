@@ -1,24 +1,10 @@
 package com.ymkj.app.entity;
 
-import com.ymkj.app.utils.JwtUtil;
-import com.ymkj.app.utils.PasswordHash;
 import lombok.Data;
-import lombok.Value;
-import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
-import static com.ymkj.app.utils.PasswordHash.createHash;
 
 /**
  * 用户实体类
@@ -41,6 +27,7 @@ public class User {
     private School school;
     private String userName;
     private String token;
+    private String code;
 
 
 }

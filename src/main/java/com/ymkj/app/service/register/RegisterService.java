@@ -14,7 +14,6 @@ import java.util.Map;
 public interface RegisterService {
 
 
-
     /**
      * 用户注册
      *
@@ -31,6 +30,12 @@ public interface RegisterService {
      */
     Map upLoad(MultipartFile file);
 
-
+    /**
+     * 验证验证码
+     *
+     * @param vCode 验证码
+     * @return 验证状态
+     */
+    Map verifyVCode(String vCode);
 
 }

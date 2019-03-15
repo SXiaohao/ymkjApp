@@ -6,7 +6,6 @@ import com.ymkj.app.entity.enumSpecification.statusCode;
 import com.ymkj.app.mapper.CommonMapper;
 import com.ymkj.app.mapper.register.RegisterMapper;
 import com.ymkj.app.service.common.VerificationCode;
-import com.ymkj.app.service.login.LoginService;
 import com.ymkj.app.utils.FileUtil;
 import com.ymkj.app.utils.JwtUtil;
 import org.springframework.stereotype.Service;
@@ -20,11 +19,9 @@ import java.security.spec.InvalidKeySpecException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.ExecutorService;
 
 import static com.ymkj.app.utils.PasswordHash.createHash;
 import static com.ymkj.app.utils.SmsUtils.sendSms;
-import static java.util.concurrent.Executors.*;
 
 /**
  * @author Xiaohao
@@ -39,6 +36,11 @@ public class RegisterServiceImpl implements RegisterService, VerificationCode {
     @Resource
     RegisterMapper registerMapper;
     private static String fileName = "201903011105473949.png";
+    private static String random;
+    /**
+     * 是否经过验证
+     */
+    private static boolean verify=false;
     private static final String IMAGE_PATH = "http://localhost/static/images/";
 
     @Override
@@ -50,7 +52,7 @@ public class RegisterServiceImpl implements RegisterService, VerificationCode {
             map.put("msg", "此手机号已注册，请直接登陆！");
         } else {
             //生成短信验证码
-            String random = String.valueOf((int) ((Math.random() * 9 + 1) * 100000));
+             random = String.valueOf((int) ((Math.random() * 9 + 1) * 100000));
             try {
                 //发送验证码
                 sendSms(phone, random);
@@ -66,29 +68,44 @@ public class RegisterServiceImpl implements RegisterService, VerificationCode {
     }
 
     @Override
+    public Map verifyVCode(String vCode) {
+        Map<String,Object>map=new LinkedHashMap<>();
+        if (vCode.equals(random)){
+            map.put("status",statusCode.FAILURE.getCode());
+            map.put("msg","验证码错误!!");
+            return map;
+        }
+        map.put("status",statusCode.SUCCESS.getCode());
+        map.put("msg","验证码正确!!");
+        verify=true;
+        return map;
+    }
+
+    @Override
     public Map register(User user) {
         Map<String, Object> map = new LinkedHashMap<>();
-        try {
-            user.setPassword(createHash(user.getPassword()));
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-            e.printStackTrace();
+        if(verify){
+            try {
+                user.setPassword(createHash(user.getPassword()));
+            } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+                e.printStackTrace();
+            }
+            user.setToken(JwtUtil.createTokenWithClaim());
+            if (registerMapper.addRegisterUser(user.getPhone(),
+                    user.getPassword(), user.getUserName(), IMAGE_PATH + fileName,
+                    user.getAddDate(), user.getSchool().getId(), user.getSex(), user.getToken()) == 1) {
+                FileUtil.moveTotherFolders(fileName);
+                map.put("token", user.getToken());
+                map.put("phone", user.getPhone());
+                map.put("sex", user.getSex());
+                map.put("userName", user.getUserName());
+                map.put("status", statusCode.SUCCESS.getCode());
+                map.put("msg", "注册成功");
+            } else {
+                map.put("status", statusCode.EXCEPTION.getCode());
+                map.put("msg", "注册失败");
+            }
         }
-        user.setToken(JwtUtil.createTokenWithClaim());
-        if (registerMapper.addRegisterUser(user.getPhone(),
-                user.getPassword(), user.getUserName(), IMAGE_PATH + fileName,
-                user.getAddDate(), user.getSchool().getId(), user.getSex(), user.getToken()) == 1) {
-            FileUtil.moveTotherFolders(fileName);
-            map.put("token", user.getToken());
-            map.put("phone", user.getPhone());
-            map.put("sex", user.getSex());
-            map.put("userName", user.getUserName());
-            map.put("status", statusCode.SUCCESS.getCode());
-            map.put("msg", "注册成功");
-        } else {
-            map.put("status", statusCode.EXCEPTION.getCode());
-            map.put("msg", "注册失败");
-        }
-
         return map;
     }
 

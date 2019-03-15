@@ -53,11 +53,14 @@ public class Register {
      * @return 图片
      * @throws IllegalStateException
      */
-    @PostMapping("/upload/avatar")
+    @PostMapping("/register/uploadAvatar")
     public Map upLoadImage(@RequestParam("avatar") MultipartFile file) throws IllegalStateException {
         return registerService.upLoad(file);
     }
-
+    @PostMapping("/register/verifyVCode")
+    public Map verifyVCode(@RequestParam("vCode")String vCode){
+        return registerService.verifyVCode(vCode);
+    }
 
 }
 
