@@ -28,11 +28,11 @@ import java.util.Date;
  */
 public class SmsUtils {
 
-
+/*
     private static final String PRODUCT = "Dysmsapi";
     private static final String DOMAIN = "dysmsapi.aliyuncs.com";
-    private static final String ACCESS_KEY_ID = "LTAIEAmtRB6q3vxv";
-    private static final String ACCESS_KEY_SECRET = "s1qtBFkbR7ThINpKMsdXHc47LKYfMb";
+    private static final String ACCESS_KEY_ID = "";
+    private static final String ACCESS_KEY_SECRET = "";
 
     public static SendSmsResponse sendSms(String phone, String random) throws ClientException {
         //可自助调整超时时间
@@ -42,7 +42,7 @@ public class SmsUtils {
         IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", ACCESS_KEY_ID, ACCESS_KEY_SECRET);
         DefaultProfile.getProfile("cn-hangzhou", "cn-hangzhou", PRODUCT, DOMAIN);
         IAcsClient acsClient = new DefaultAcsClient(profile);
-
+*/
         //组装请求对象-具体描述见控制台-文档部分内容
         SendSmsRequest request = new SendSmsRequest();
         //必填:待发送手机号
