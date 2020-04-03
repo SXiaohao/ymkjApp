@@ -29,7 +29,7 @@ import java.util.Date;
  */
 public class SmsUtils {
 
-
+/*
     private static final String PRODUCT = "Dysmsapi";
     private static final String DOMAIN = "dysmsapi.aliyuncs.com";
     private static final String ACCESS_KEY_ID = "LTAIEAmtRB6q3vxv";
@@ -94,5 +94,5 @@ public class SmsUtils {
         return acsClient.getAcsResponse(request);
     }
 
-
+*/
 }
